@@ -1,0 +1,21 @@
+server:
+  port: 8080    # 服务启动在 8080 端口
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher    # ← 加这一行，解决 Knife4j 兼容问题
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sky_take_out?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456    # ← 改成你自己的密码！
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true    # 数据库下划线命名自动转驼峰
+
+logging:
+  level:
+    com.sky.mapper: debug    # 打印 SQL 语句，方便调试
