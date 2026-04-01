@@ -18,4 +18,10 @@ mybatis:
 
 logging:
   level:
-    com.sky.mapper: debug    # 打印 SQL 语句，方便调试
+    com.sky.mapper:
+      debug
+sky:
+  jwt:
+    admin-secret-key: itcast
+    admin-ttl: 7200000
+    admin-token-name: token#
