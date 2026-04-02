@@ -29,6 +29,12 @@ public class EmployeeController {
     @Autowired
     private JwtProperties jwtProperties;
 
+    // 退出登录
+    @PostMapping("/logout")
+    public Result logout() {
+        return Result.success();
+    }
+
     @PostMapping("/login")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO){
         log.info("员工登录： {}",employeeLoginDTO);
@@ -49,5 +55,6 @@ public class EmployeeController {
                 .token(token)
                 .build();
         return Result.success(employeeLoginVO);
+
     }
 }
