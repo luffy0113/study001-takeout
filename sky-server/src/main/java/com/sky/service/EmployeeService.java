@@ -34,7 +34,7 @@ public interface EmployeeService {
     Employee getById(Long id);
 
     /**
-     * 根据id查询员工
+     * 根据id编辑员工
      */
     void update(EmployeeDTO employeeDTO);
 }
