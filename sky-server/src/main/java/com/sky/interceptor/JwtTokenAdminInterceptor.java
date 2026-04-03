@@ -40,6 +40,7 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
             return true;
         } catch (Exception ex) {
             //解析失败，拦截
+            log.error("jwt校验失败：{}", ex.getMessage());
             response.setStatus(401);
             return false;
         }
