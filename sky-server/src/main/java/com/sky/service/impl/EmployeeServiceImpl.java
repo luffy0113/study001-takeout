@@ -59,12 +59,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 第二步：设置 DTO 里没有的字段（后端自己填的）
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));  // 默认密码 123456，MD5加密
         employee.setStatus(1);                          // 默认启用
-        employee.setCreateTime(LocalDateTime.now());    // 创建时间 = 现在
-        employee.setUpdateTime(LocalDateTime.now());    // 修改时间 = 现在
-
-        // TODO：createUser 和 updateUser 先写死，后面学了 ThreadLocal 再改
-        employee.setCreateUser(1L);                     // 先写死为管理员id=1
-        employee.setUpdateUser(1L);
 
         // 第三步：调用 Mapper 插入数据库
         employeeMapper.insert(employee);
@@ -91,8 +85,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = Employee.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(1L)    // 先写死，后面改
                 .build();
 
         employeeMapper.update(employee);
@@ -115,10 +107,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 把 DTO 转成实体类
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
-
-        // 补充修改时间和修改人
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(1L);    // 先写死，后面改
 
         // 调用通用的 update 方法
         employeeMapper.update(employee);

@@ -1,5 +1,6 @@
 package com.sky.interceptor;
 
+import com.sky.context.BaseContext;
 import com.sky.properties.JwtProperties;
 import com.sky.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -35,6 +36,9 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
             Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
             Long empID = Long.valueOf(claims.get("empID").toString());
             log.info("当前的员工ID为：{}", empID);
+
+            // ★ 新增：把当前登录用户的 id 存进 ThreadLocal
+            BaseContext.setCurrentId(empID);
 
             //解析成功，放行
             return true;
